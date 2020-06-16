@@ -19,5 +19,63 @@ We currently have a single endpoint that lets you query for food trucks with som
 
 ### Parameters
 `location` allows the our users to pass in their latitude and longitude coordinates and have the returned trucks include a "distance" attribute showing how far away they are from it. Especially useful for quick lunches on launch days  where every minute counts.
+
 `sort_by` allows our users to sort the results. 'distance' is the only currently supported value
+
 `limit` allows our users to limit the number of trucks returned, because decision fatigue is a real thing.
+
+### Example
+```
+$ curl  -H 'Accept: application/json' "localhost:4000/trucks?location[latitude]=84&location[longitude]=34&sort_by=distance&limit=2"
+
+[
+  {
+    "address": "900 BEACH ST",
+    "applicant": "Bay Area Dots, LLC",
+    "facility_type": "Push Cart",
+    "food_items": [
+      "Hot dogs",
+      "condiments",
+      "soft pretzels",
+      "soft drinks",
+      "coffee:cold beverages",
+      "pastries",
+      "bakery goods",
+      "cookies",
+      "icecream",
+      "candy",
+      "soups",
+      "churros",
+      "chestnuts",
+      "nuts",
+      "fresh fruit",
+      "fruit juices",
+      "desserts",
+      "potato chips and popcorn."
+    ],
+    "point": {
+      "latitude": 37.8077432884455,
+      "longitude": -122.42414994487
+    },
+    "distance": 6420.688174738894
+  },
+  {
+    "address": "500 FRANCISCO ST",
+    "applicant": "Anas Goodies Catering",
+    "facility_type": "Truck",
+    "food_items": [
+      "Cold Truck",
+      "Sandwiches",
+      "Noodles",
+      " Pre-packaged Snacks",
+      "Candy",
+      "Desserts Various Beverages"
+    ],
+    "point": {
+      "latitude": 37.8050495090589,
+      "longitude": -122.41433443694
+    },
+    "distance": 6420.944768237196
+  }
+]
+```
