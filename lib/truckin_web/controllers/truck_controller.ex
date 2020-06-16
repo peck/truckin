@@ -16,13 +16,14 @@ defmodule TruckinWeb.TruckController do
     json(conn, trucks)
   end
 
+  #These should be in a context of their own vs in controller, but throwing them here in the interest of time
+
   def maybe_distance(trucks, %{"location" => %{"latitude" => latitude, "longitude" => longitude}}) do
     Logger.debug("in distance")
     query_point = %Point{latitude: Float.parse(latitude) |> elem(0), longitude: Float.parse(longitude) |> elem(0)}
 
     trucks = Enum.map(trucks, fn truck ->
       distance_from_query = Truckin.Utilities.haversine_distance(truck.point, query_point)
-      IO.inspect(distance_from_query)
       %{truck | distance: distance_from_query}
     end)
   end
